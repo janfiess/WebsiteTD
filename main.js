@@ -1,7 +1,7 @@
 const http = require("http");
 const express = require("express");
+const path = require("path");
 const app = express();
-const fs = require("fs");
 
 app.use(express.static("public"));
 // require("dotenv").config();
@@ -80,11 +80,11 @@ const keepServerAlive = () => {
   }, 50000);
 };
 
-app.get("/", (req, res) => {
-  // res.send('Hello World!');
-  fs.readFile("./website/index.html", function (request, response) {
-    response.writeHeader(200, { "Content-Type": "text/html" });
-    response.write(html);
-    response.end();
-  }).listen(serverPort);
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
+
+app.use("/", function (req, res) {
+  res.sendFile(path.join(__dirname + "/website/index.html"));
+  //__dirname : It will resolve to your project folder.
 });
