@@ -80,10 +80,7 @@ const keepServerAlive = () => {
   }, 50000);
 };
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
-
+app.use(express.static(__dirname + "/website"));
 app.use("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/website/index.html"));
   //__dirname : It will resolve to your project folder.
